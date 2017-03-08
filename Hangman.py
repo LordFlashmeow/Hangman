@@ -18,8 +18,20 @@ lose = False
 def import_dictionary():
 
     try:
-        file = open("usa.txt").read()
-        print("Loading wordlist...\n")
+        difficulty = input("(e)asy, (m)edium or (h)ard? ").lower()
+
+        if difficulty == 'e':
+            file = open("20k.txt").read()
+            print("Loading easy wordlist...\n")
+
+        if difficulty == 'm':
+            file = open("60k.txt").read()
+            print("Loading medium wordlist...\n")
+
+        if difficulty == 'h':
+            file = open("350k.txt").read()
+            print("Loading hard wordlist...\n")
+
         for word in file.split():
             word_list.append(word)
 
@@ -28,7 +40,8 @@ def import_dictionary():
 
 
 def select_word():
-    global selected_word, tries_left, letters_left, right_guesses, wrong_guesses
+    global selected_word, tries_left, letters_left,\
+        right_guesses, wrong_guesses
 
     right_guesses = []
     wrong_guesses = []
@@ -52,14 +65,14 @@ def display_letters():
     letters_left = len(selected_word)
     printed_output = []
     for letter in selected_word:
-        if not letter.isalpha():        # Display any non-alphabetical characters
+        if not letter.isalpha():    # Display any non-alphabetical characters
             printed_output.append(letter)
 
         if letter in right_guesses:
             printed_output.append(letter)
             letters_left -= 1
 
-        else:                           # Display unguessed letters as underscores
+        else:                       # Display unguessed letters as underscores
             printed_output.append("_ ")
 
     print("".join(printed_output))
@@ -179,7 +192,6 @@ def gallows(wrong_answers):
     "|                "
     """
 
-
     # Show the bar of the gallows first
 
     if wrong_answers > 0:
@@ -198,7 +210,6 @@ def gallows(wrong_answers):
         print("|               ")
         print("|               ")
         print("|               ")
-
 
     if wrong_answers > 1:
         print("|           |   ")
@@ -276,6 +287,7 @@ def gallows(wrong_answers):
 
     if wrong_answers > 8:
         print("\nYou should be dead!")
+
 
 import_dictionary()
 
