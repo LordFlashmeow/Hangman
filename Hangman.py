@@ -1,7 +1,5 @@
 import random
-import PyDictionary
-
-dictionary = PyDictionary.PyDictionary()
+import pylexicon
 
 word_list = []
 right_guesses = []
@@ -149,7 +147,7 @@ def game():
 
 def define(word):
     counter = 0
-    definition = dictionary.meaning(word)
+    definition = pylexicon.meaning(word)
     if definition:
         print(word.capitalize())
         for group in definition:
